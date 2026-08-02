@@ -237,7 +237,7 @@ export default function AdmitFlow() {
       />
 
       {showStepper && (
-        <div className="w-full max-w-[720px] grid grid-cols-3 gap-3" style={{ marginBottom: "clamp(30px,5vh,52px)" }}>
+        <div data-steps="1" className="w-full max-w-[720px] grid grid-cols-3 gap-3" style={{ marginBottom: "clamp(30px,5vh,52px)" }}>
           {["Assessment", "Fit report", "Reserve seat"].map((label, i) => {
             const p = stepPaint(i);
             return (

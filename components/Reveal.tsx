@@ -10,11 +10,13 @@ export default function Reveal({
   className,
   style,
   as = "div",
+  ...rest
 }: {
   children: ReactNode;
   className?: string;
   style?: React.CSSProperties;
   as?: "div" | "h1" | "h2" | "h3" | "p";
+  [key: `data-${string}`]: string | undefined;
 }) {
   const MotionTag = motion[as];
   return (
@@ -25,6 +27,7 @@ export default function Reveal({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.75, ease: BRAND_EASE }}
+      {...rest}
     >
       {children}
     </MotionTag>

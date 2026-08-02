@@ -44,6 +44,7 @@ export default function HomePage() {
                 ].map(([a, b]) => (
                   <div
                     key={a}
+                    data-paidrow="1"
                     className="flex justify-between gap-4 pb-3 border-b border-white/5 font-mono text-xs text-muted-600"
                   >
                     <span className="line-through decoration-red/50">{a}</span>
@@ -55,7 +56,7 @@ export default function HomePage() {
               <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-gold mb-3">
                 What to pay for instead
               </div>
-              <div className="flex justify-between gap-4 font-mono text-[13px] font-medium text-gold">
+              <div data-paidrow="1" className="flex justify-between gap-4 font-mono text-[13px] font-medium text-gold">
                 <span>Deservv — Applied &amp; Agentic AI</span>
                 <span className="whitespace-nowrap">
                   {PROGRAM.duration} · {feeLabel} · systems that run
@@ -64,20 +65,29 @@ export default function HomePage() {
             </div>
           </div>
 
-          <Reveal as="h1" className="font-display font-semibold leading-[1.02] mt-9 md:mt-18 max-w-[20ch]">
-            <span style={{ fontSize: "clamp(34px,5.4vw,76px)", letterSpacing: "-0.035em" }} className="block">
-              You never needed another certificate. You needed the{" "}
-              <span className="text-gold">systems</span>.
-            </span>
+          <Reveal
+            as="h1"
+            className="font-display font-semibold leading-[1.02] max-w-[20ch]"
+            style={{
+              fontSize: "clamp(34px,5.4vw,76px)",
+              letterSpacing: "-0.035em",
+              margin: "clamp(36px,6vw,72px) 0 0",
+              textWrap: "balance",
+            }}
+          >
+            You never needed another certificate. You needed the{" "}
+            <span className="text-gold">systems</span>.
           </Reveal>
 
-          <Reveal className="max-w-[62ch] text-muted-100 mt-6.5" as="p">
-            <span style={{ fontSize: "clamp(16px,1.3vw,19px)", lineHeight: 1.65 }}>
-              Every year you paid for theory and left with slides. Meanwhile the
-              people pulling ahead of you quietly rebuilt their own working day,
-              one task at a time, until AI stopped being a tab they open and
-              became the thing they work inside.
-            </span>
+          <Reveal
+            as="p"
+            className="max-w-[62ch] text-muted-100"
+            style={{ fontSize: "clamp(16px,1.3vw,19px)", lineHeight: 1.65, margin: "26px 0 0", textWrap: "pretty" }}
+          >
+            Every year you paid for theory and left with slides. Meanwhile the
+            people pulling ahead of you quietly rebuilt their own working day,
+            one task at a time, until AI stopped being a tab they open and
+            became the thing they work inside.
           </Reveal>
 
           <Reveal className="flex flex-wrap gap-3.5 mt-8">
@@ -134,11 +144,13 @@ export default function HomePage() {
           <div className="font-mono text-[11.5px] tracking-[0.2em] uppercase text-gold mb-5">
             What the market sells you
           </div>
-          <Reveal as="h2" className="font-display font-semibold leading-[1.06] mb-5 max-w-[26ch]">
-            <span style={{ fontSize: "clamp(30px,4.2vw,58px)", letterSpacing: "-0.03em" }}>
-              Six months. Two lakhs. A glorious certificate.{" "}
-              <span className="text-muted-400">And nothing changes on Monday.</span>
-            </span>
+          <Reveal
+            as="h2"
+            className="font-display font-semibold leading-[1.06] max-w-[26ch]"
+            style={{ fontSize: "clamp(30px,4.2vw,58px)", letterSpacing: "-0.03em", margin: "0 0 22px", textWrap: "balance" }}
+          >
+            Six months. Two lakhs. A glorious certificate.{" "}
+            <span className="text-muted-400">And nothing changes on Monday.</span>
           </Reveal>
           <Reveal as="p" className="max-w-[60ch] text-[17px] leading-[1.65] text-muted-100">
             <span style={{ marginBottom: "clamp(40px,5vw,64px)" }} className="block">
@@ -179,7 +191,7 @@ export default function HomePage() {
             </span>
           </Reveal>
 
-          <Reveal className="border border-white/10 overflow-hidden mt-8" as="div">
+          <Reveal className="border border-white/10 overflow-hidden mt-8" as="div" data-cmp="1">
             <div className="grid bg-white/[0.02]" style={{ gridTemplateColumns: "minmax(120px, 0.9fr) 1fr 1fr" }}>
               <div className="p-6.5 border-r border-white/[0.08]" />
               <div className="p-6.5 border-r border-white/[0.08] text-center">

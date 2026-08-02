@@ -203,10 +203,12 @@ export default function HirePage() {
         >
           <div>
             <div className="font-mono text-[11.5px] tracking-[0.2em] uppercase text-gold mb-5">Next step</div>
-            <Reveal as="h2" className="font-display font-semibold leading-[1.05] mb-4.5 max-w-[20ch]">
-              <span style={{ fontSize: "clamp(28px,3.6vw,50px)", letterSpacing: "-0.03em" }}>
-                One call. Bring the workflow that hurts most.
-              </span>
+            <Reveal
+              as="h2"
+              className="font-display font-semibold leading-[1.05] max-w-[20ch]"
+              style={{ fontSize: "clamp(28px,3.6vw,50px)", letterSpacing: "-0.03em", margin: "0 0 18px", textWrap: "balance" }}
+            >
+              One call. Bring the workflow that hurts most.
             </Reveal>
             <Reveal as="p" className="max-w-[48ch] text-[16.5px] leading-[1.65] text-muted-100">
               Tell us the function and the tools. We come back with either

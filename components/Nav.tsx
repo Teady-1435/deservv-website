@@ -28,7 +28,7 @@ export default function Nav() {
   const pathname = usePathname();
   const router = useRouter();
   const { inverted } = useNavTone();
-  const { replay } = useHomeReel();
+  const { replay, navLogoRef, navLinksRef } = useHomeReel();
   const time = useClock();
 
   const isHome = pathname === "/";
@@ -54,6 +54,8 @@ export default function Nav() {
       }`}
     >
       <button
+        ref={navLogoRef}
+        data-nav-logo="1"
         onClick={handleLogoClick}
         className={`flex items-baseline gap-2 bg-transparent border-0 p-0 cursor-pointer ${
           inverted ? "text-white" : "text-ivory"
@@ -62,9 +64,10 @@ export default function Nav() {
         <Logo />
       </button>
 
-      <div className="flex items-center gap-1.5 md:gap-6">
+      <div ref={navLinksRef} data-nav-links="1" className="flex items-center gap-1.5 md:gap-6">
         <div
-          className={`hidden md:flex items-center gap-3 mr-2.5 font-mono text-[10.5px] tracking-[0.12em] uppercase ${
+          data-chrome="1"
+          className={`flex items-center gap-3 mr-2.5 font-mono text-[10.5px] tracking-[0.12em] uppercase ${
             inverted ? "text-white/78" : "text-muted-300"
           }`}
         >
@@ -109,6 +112,7 @@ export default function Nav() {
         </Link>
         <Link
           href="/apply/start"
+          data-cta="1"
           className={`ml-2 rounded-full px-5 py-2.5 cursor-pointer font-mono text-[11.5px] tracking-[0.1em] uppercase font-medium transition-colors ${
             inverted ? "bg-white text-red hover:bg-gold-hover" : "bg-ivory text-ink hover:bg-gold"
           }`}

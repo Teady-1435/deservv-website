@@ -118,10 +118,12 @@ export default function ApplyPage() {
       >
         <div className="max-w-[1280px] mx-auto">
           <div className="font-mono text-[11.5px] tracking-[0.2em] uppercase text-gold mb-5">The curriculum</div>
-          <Reveal as="h2" className="font-display font-semibold leading-[1.06] mb-5.5 max-w-[24ch]">
-            <span style={{ fontSize: "clamp(30px,4vw,54px)", letterSpacing: "-0.03em" }}>
-              Eight levels. Each one stands on the last.
-            </span>
+          <Reveal
+            as="h2"
+            className="font-display font-semibold leading-[1.06] max-w-[24ch]"
+            style={{ fontSize: "clamp(30px,4vw,54px)", letterSpacing: "-0.03em", margin: "0 0 22px", textWrap: "balance" }}
+          >
+            Eight levels. Each one stands on the last.
           </Reveal>
           <Reveal as="p" className="max-w-[58ch] text-[17px] leading-[1.65] text-muted-100 mb-9 md:mb-14">
             You start by changing how you look at your own week and finish
@@ -159,11 +161,13 @@ export default function ApplyPage() {
           <div className="font-mono text-[11.5px] tracking-[0.2em] uppercase text-gold mb-5">
             What you actually walk away holding
           </div>
-          <Reveal as="h2" className="font-display font-semibold leading-[1.06] mb-5.5 max-w-[26ch]">
-            <span style={{ fontSize: "clamp(30px,4vw,54px)", letterSpacing: "-0.03em" }}>
-              No notes. No slide folder.{" "}
-              <span className="text-gold">Systems that are already running.</span>
-            </span>
+          <Reveal
+            as="h2"
+            className="font-display font-semibold leading-[1.06] max-w-[26ch]"
+            style={{ fontSize: "clamp(30px,4vw,54px)", letterSpacing: "-0.03em", margin: "0 0 22px", textWrap: "balance" }}
+          >
+            No notes. No slide folder.{" "}
+            <span className="text-gold">Systems that are already running.</span>
           </Reveal>
           <Reveal as="p" className="max-w-[58ch] text-[17px] leading-[1.65] text-muted-100 mb-9 md:mb-13">
             Your manager will not be told you attended something. They will
@@ -237,6 +241,7 @@ export default function ApplyPage() {
             ].map(([tag, w, amount, name, desc, cls], i) => (
               <div
                 key={name as string}
+                data-wf="1"
                 className="w-full grid items-center gap-3.5 md:gap-8.5"
                 style={{ gridTemplateColumns: "minmax(0, 1fr) minmax(160px, 240px)" }}
               >
@@ -328,7 +333,7 @@ export default function ApplyPage() {
             then your seat. No interview call, no waiting on a reply.
           </p>
 
-          <div className="grid grid-cols-3 gap-3 mb-8 md:mb-10">
+          <div data-steps="1" className="grid grid-cols-3 gap-3 mb-8 md:mb-10">
             <div className="flex flex-col gap-2.5">
               <div className="h-0.5 bg-gold" />
               <div className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-ivory">Assessment</div>
