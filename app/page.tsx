@@ -1,65 +1,297 @@
-import Image from "next/image";
+import HomeReel from "@/components/HomeReel";
+import Reveal from "@/components/Reveal";
+import Footer from "@/components/Footer";
+import { PROGRAM, money } from "@/lib/config";
 
-export default function Home() {
+const feeLabel = money(PROGRAM.fee);
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div>
+      <HomeReel />
+
+      <section
+        className="relative border-b border-white/[0.07] overflow-hidden"
+        style={{ padding: "clamp(56px,9vw,120px) clamp(20px,4vw,56px) clamp(40px,6vw,80px)" }}
+      >
+        <div className="absolute -top-[180px] -right-[120px] w-[520px] h-[520px] rounded-full border border-dashed border-gold/[0.14] pointer-events-none" />
+        <div className="max-w-[1280px] mx-auto">
+          <div
+            className="font-mono text-[11.5px] tracking-[0.2em] uppercase text-gold"
+            style={{ marginBottom: "clamp(20px,3vw,30px)" }}
+          >
+            What you already paid for
+          </div>
+
+          <p className="max-w-[54ch] text-base leading-[1.6] text-muted-100 mb-6 md:mb-10">
+            You already spent lakhs on the first three. Here is the one that
+            pays you back.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+          <div
+            className="grid gap-7 md:gap-16 items-end"
+            style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="flex flex-col">
+              <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-600 mb-3.5">
+                Programs you already paid for — elsewhere
+              </div>
+              <div className="flex flex-col gap-3.5">
+                {[
+                  ["Data Science Bootcamp", "6 months · ₹1,80,000 · certificate"],
+                  ["Advanced Analytics PG", "11 months · ₹2,40,000 · certificate"],
+                  ["Generative AI Masterclass", "4 months · ₹95,000 · certificate"],
+                ].map(([a, b]) => (
+                  <div
+                    key={a}
+                    className="flex justify-between gap-4 pb-3 border-b border-white/5 font-mono text-xs text-muted-600"
+                  >
+                    <span className="line-through decoration-red/50">{a}</span>
+                    <span className="line-through decoration-red/50">{b}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="h-px bg-gold/40 my-7 mb-4" />
+              <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-gold mb-3">
+                What to pay for instead
+              </div>
+              <div className="flex justify-between gap-4 font-mono text-[13px] font-medium text-gold">
+                <span>Deservv — Applied &amp; Agentic AI</span>
+                <span className="whitespace-nowrap">
+                  {PROGRAM.duration} · {feeLabel} · systems that run
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <Reveal as="h1" className="font-display font-semibold leading-[1.02] mt-9 md:mt-18 max-w-[20ch]">
+            <span style={{ fontSize: "clamp(34px,5.4vw,76px)", letterSpacing: "-0.035em" }} className="block">
+              You never needed another certificate. You needed the{" "}
+              <span className="text-gold">systems</span>.
+            </span>
+          </Reveal>
+
+          <Reveal className="max-w-[62ch] text-muted-100 mt-6.5" as="p">
+            <span style={{ fontSize: "clamp(16px,1.3vw,19px)", lineHeight: 1.65 }}>
+              Every year you paid for theory and left with slides. Meanwhile the
+              people pulling ahead of you quietly rebuilt their own working day,
+              one task at a time, until AI stopped being a tab they open and
+              became the thing they work inside.
+            </span>
+          </Reveal>
+
+          <Reveal className="flex flex-wrap gap-3.5 mt-8">
+            <a
+              href="/apply"
+              className="bg-red text-white rounded-full px-7 py-4 cursor-pointer font-mono text-[12.5px] tracking-[0.1em] uppercase font-medium hover:bg-red-hover"
+            >
+              Apply for the next cohort
+            </a>
+            <a
+              href="/hire"
+              className="bg-transparent text-ivory border border-white/[0.18] rounded-full px-7 py-4 cursor-pointer font-mono text-[12.5px] tracking-[0.1em] uppercase hover:border-gold hover:text-gold"
+            >
+              I want to hire this talent
+            </a>
+          </Reveal>
         </div>
-      </main>
+      </section>
+
+      <section
+        className="border-b border-white/[0.07] bg-ink-alt"
+        style={{ padding: "clamp(20px,3vw,30px) clamp(20px,4vw,56px)" }}
+      >
+        <div
+          className="max-w-[1280px] mx-auto grid gap-5"
+          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))" }}
+        >
+          {[
+            [PROGRAM.duration, "Not six months"],
+            [feeLabel, "Not ₹1–3 lakh"],
+            ["1 instructor", "Live, in the room with you"],
+            ["8 parts", "Every one a working build"],
+          ].map(([big, small]) => (
+            <div key={small} className="flex flex-col gap-1.5">
+              <span className="font-display text-[26px] font-semibold" style={{ letterSpacing: "-0.02em" }}>
+                {big}
+              </span>
+              <span className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-muted-400">
+                {small}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section
+        className="border-b border-white/[0.07]"
+        style={{ padding: "clamp(60px,8vw,110px) clamp(20px,4vw,56px)", background: "rgba(229,52,42,0.03)" }}
+      >
+        <div className="max-w-[1280px] mx-auto">
+          <div className="font-mono text-[11px] tracking-[0.2em] uppercase text-red mb-2.5">
+            This is the market. Not us.
+          </div>
+          <div className="font-mono text-[11.5px] tracking-[0.2em] uppercase text-gold mb-5">
+            What the market sells you
+          </div>
+          <Reveal as="h2" className="font-display font-semibold leading-[1.06] mb-5 max-w-[26ch]">
+            <span style={{ fontSize: "clamp(30px,4.2vw,58px)", letterSpacing: "-0.03em" }}>
+              Six months. Two lakhs. A glorious certificate.{" "}
+              <span className="text-muted-400">And nothing changes on Monday.</span>
+            </span>
+          </Reveal>
+          <Reveal as="p" className="max-w-[60ch] text-[17px] leading-[1.65] text-muted-100">
+            <span style={{ marginBottom: "clamp(40px,5vw,64px)" }} className="block">
+              Neural-network diagrams you will never draw again. A tour of forty
+              tools at five minutes each. One new habit: you occasionally chat
+              with a chatbot. Your appraisal knows the difference.
+            </span>
+          </Reveal>
+
+          <Reveal className="grid gap-px bg-white/[0.08] border border-white/[0.08]" as="div">
+            <div
+              className="grid gap-px bg-white/[0.08]"
+              style={{ gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}
+            >
+              {[
+                ["6 mo", "of evenings, in exchange for a syllabus written before the agent era started."],
+                ["₹1–3L", "paid upfront, often on EMI, for content you could have watched for free."],
+                ["1 PDF", "to hang on LinkedIn. No promotion attached. No hike attached. No system running."],
+              ].map(([big, text]) => (
+                <div key={big} className="bg-ink-alt p-8 md:p-9 flex flex-col gap-3">
+                  <span className="font-display text-[42px] font-semibold text-red" style={{ letterSpacing: "-0.03em" }}>
+                    {big}
+                  </span>
+                  <span className="text-[15.5px] leading-[1.6] text-muted-100">{text}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal as="p" className="max-w-[62ch] mx-auto text-center text-muted-100 text-[16.5px] leading-[1.65] mt-10">
+            Everything above is what they sold you. Everything below is what we
+            built instead.
+          </Reveal>
+
+          <Reveal as="h3" className="font-display font-semibold leading-[1.08] text-center mt-10">
+            <span style={{ fontSize: "clamp(26px,3.2vw,44px)", letterSpacing: "-0.03em" }}>
+              Same ambition. <span className="text-gold">Different delivery.</span>
+            </span>
+          </Reveal>
+
+          <Reveal className="border border-white/10 overflow-hidden mt-8" as="div">
+            <div className="grid bg-white/[0.02]" style={{ gridTemplateColumns: "minmax(120px, 0.9fr) 1fr 1fr" }}>
+              <div className="p-6.5 border-r border-white/[0.08]" />
+              <div className="p-6.5 border-r border-white/[0.08] text-center">
+                <div className="font-display text-[clamp(19px,2vw,26px)] font-semibold text-muted-300" style={{ letterSpacing: "-0.02em" }}>
+                  The AI course
+                </div>
+                <div className="font-mono text-[11px] text-muted-400 mt-2">Learn about AI</div>
+              </div>
+              <div className="p-6.5 text-center bg-gold/5">
+                <div className="font-display text-[clamp(19px,2vw,26px)] font-semibold text-ivory" style={{ letterSpacing: "-0.02em" }}>
+                  Deservv
+                </div>
+                <div className="font-mono text-[11px] text-gold mt-2">Work through AI</div>
+              </div>
+            </div>
+            {[
+              ["Length", "4–11 months of lectures", `${PROGRAM.duration} of building`],
+              ["Fee", "₹1,00,000 – ₹3,00,000", `${feeLabel}, one payment`],
+              ["Who teaches", "Rotating TAs over recorded video", "One working engineer, live, every session"],
+              ["Curriculum", "Generic sandbox exercises", "Written against the tools your role actually touches"],
+              ["How you learn", "Watch a tutorial, take a quiz", "Build the project with him, then rebuild it for your own job"],
+              ["You leave with", "A certificate", "Agents already running inside your working week"],
+            ].map(([label, course, deservv]) => (
+              <div key={label} className="grid border-t border-white/[0.08]" style={{ gridTemplateColumns: "minmax(120px, 0.9fr) 1fr 1fr" }}>
+                <div className="p-5.5 border-r border-white/[0.08] font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted-400">
+                  {label}
+                </div>
+                <div className="p-5.5 border-r border-white/[0.08] text-center text-[15.5px] text-muted-300">
+                  {course}
+                </div>
+                <div className="p-5.5 text-center text-[15.5px] bg-gold/[0.03]">{deservv}</div>
+              </div>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      <section
+        className="border-b border-white/[0.07] bg-ink-alt overflow-hidden"
+        style={{ padding: "clamp(60px,8vw,110px) clamp(20px,4vw,56px)" }}
+      >
+        <div className="max-w-[1280px] mx-auto">
+          <div className="font-mono text-[11.5px] tracking-[0.2em] uppercase text-gold mb-5">
+            The room you join
+          </div>
+          <div
+            className="grid items-center"
+            style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "clamp(32px,5vw,64px)" }}
+          >
+            <div>
+              <Reveal as="h2" className="font-display font-semibold leading-[1.06] mb-5">
+                <span style={{ fontSize: "clamp(30px,4.2vw,56px)", letterSpacing: "-0.03em" }}>
+                  The cohort ends. <span className="text-gold">The room doesn&apos;t.</span>
+                </span>
+              </Reveal>
+              <Reveal as="p" className="max-w-[52ch] text-[17px] leading-[1.65] text-muted-100 mb-7">
+                A course is a calendar. A room is a compounding asset. Your batch
+                is deliberately mixed — a finance controller, a growth lead, a
+                support head, two founders — because the automation that saves
+                an ops manager eleven hours is one a recruiter has never thought
+                of.
+              </Reveal>
+              <Reveal className="flex flex-col border-t border-white/[0.08]">
+                {[
+                  ["01", "Monthly meetup, Bengaluru", "One Saturday a month, in person. Three members demo something they shipped. No slides allowed — screens only."],
+                  ["02", "The build channel", "Post a broken workflow, get it unblocked. Alumni answer, because six months ago they asked the same thing."],
+                  ["03", "The tool layer moves. You move with it.", "When a tool in the curriculum changes, the room gets the rebuild. The skill was never the tool."],
+                ].map(([num, title, body]) => (
+                  <div key={num} className="flex gap-4 py-4.5 border-b border-white/[0.08]">
+                    <span className="font-mono text-[11px] text-gold pt-1">{num}</span>
+                    <div>
+                      <div className="font-display text-[18px] font-medium mb-1.5">{title}</div>
+                      <div className="text-[15px] leading-[1.6] text-muted-200">{body}</div>
+                    </div>
+                  </div>
+                ))}
+              </Reveal>
+            </div>
+            <Reveal className="relative">
+              <div className="relative w-full aspect-[4/3] border border-white/10 bg-white/[0.03] flex items-center justify-center">
+                <span className="font-mono text-[11px] text-muted-500 text-center px-6">
+                  Bengaluru meetup photo — a real room, real screens
+                </span>
+                <div className="absolute left-0 bottom-0 px-4 py-3.5 font-mono text-[10.5px] tracking-[0.14em] uppercase text-white/75 pointer-events-none">
+                  Bengaluru · monthly · members only
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+        <div className="mt-10 md:mt-18 border-t border-b border-white/[0.08] py-5.5 overflow-hidden whitespace-nowrap">
+          <div
+            className="inline-flex gap-11 font-mono text-[12.5px] tracking-[0.12em] uppercase text-muted-600"
+            style={{ animation: "marquee 38s linear infinite" }}
+          >
+            {Array.from({ length: 2 }).map((_, rep) => (
+              <span key={rep} className="inline-flex gap-11">
+                {["Product", "Finance", "Recruiting", "Support", "Ops", "Growth", "Legal", "Founders", "Consulting", "Design", "Sales", "Manufacturing"].map(
+                  (t) => (
+                    <span key={t}>
+                      {t}
+                      <span className="text-gold ml-11">·</span>
+                    </span>
+                  )
+                )}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 }
