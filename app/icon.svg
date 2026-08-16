@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Deservv">
+  <rect width="64" height="64" fill="#0a0908"/>
+  <g fill="none" stroke="#e5342a" stroke-linejoin="miter" stroke-miterlimit="10">
+    <path d="M7.5 25 L15.5 40 L23.5 25" stroke-width="5.5"/>
+    <path d="M31.5 14 L43.5 46 L55.5 14" stroke-width="7"/>
+  </g>
+</svg>

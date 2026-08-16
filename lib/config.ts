@@ -1,8 +1,24 @@
+/**
+ * Photography slots.
+ *
+ * Set a value to a path under /public once the real photo exists and the section
+ * swaps from placeholder to image with no other code change.
+ * Example: communityMeetup: "/img/community-meetup.jpg"
+ */
+export const IMAGES: Record<
+  "communityMeetup" | "liveSessionStill" | "lastCohort",
+  string | null
+> = {
+  communityMeetup: null,
+  liveSessionStill: null,
+  lastCohort: null,
+};
+
 export const PROGRAM = {
   fee: 10000,
   seats: 24,
   duration: "15 days",
-  cohort: "Cohort 02 — applications open",
+  cohort: "Cohort 01 — applications open",
   cohortStart: "Monday, 17 August — 8:30 pm IST",
 };
 

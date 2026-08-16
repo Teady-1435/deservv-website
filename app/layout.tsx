@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, JetBrains_Mono, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { NavToneProvider } from "@/components/NavToneContext";
@@ -23,10 +23,49 @@ const ibmPlexSans = IBM_Plex_Sans({
   weight: ["400", "500", "600"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://deservv.com";
+
+const title = "Deservv — Applied & Agentic AI";
+const description =
+  "Twelve years of courses. Nothing changed on Monday. Fifteen days, one instructor, systems that run inside your job.";
+
 export const metadata: Metadata = {
-  title: "Deservv — Applied & Agentic AI",
-  description:
-    "Twelve years of courses. Nothing changed on Monday. Fifteen days, one instructor, systems that run inside your job.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: title,
+    template: "%s — Deservv",
+  },
+  description,
+  applicationName: "Deservv",
+  keywords: [
+    "applied AI",
+    "agentic AI",
+    "AI cohort",
+    "AI training Bengaluru",
+    "AI agents",
+    "Deservv",
+  ],
+  openGraph: {
+    type: "website",
+    siteName: "Deservv",
+    url: siteUrl,
+    title,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a0908",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

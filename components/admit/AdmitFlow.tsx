@@ -23,14 +23,33 @@ type Step = "signup" | "q" | "mid" | "build" | "report" | "pay" | "done";
 
 type SignupData = { name: string; email: string; phone: string };
 
+type CashfreeCheckoutResult = {
+  error?: { message?: string };
+  redirect?: boolean;
+  paymentDetails?: { paymentMessage?: string };
+};
+
 declare global {
   interface Window {
     Razorpay: new (options: Record<string, unknown>) => {
       open: () => void;
       on: (event: string, cb: (response: unknown) => void) => void;
     };
+    Cashfree?: (options: { mode: "sandbox" | "production" }) => {
+      checkout: (options: {
+        paymentSessionId: string;
+        redirectTarget?: "_modal" | "_self" | "_blank";
+      }) => Promise<CashfreeCheckoutResult>;
+    };
   }
 }
+
+/**
+ * Which gateway is live. Razorpay stays the default so the deployed site keeps
+ * working until Cashfree credentials exist; flip the env var to switch.
+ */
+const PROVIDER: "cashfree" | "razorpay" =
+  process.env.NEXT_PUBLIC_PAYMENT_PROVIDER === "cashfree" ? "cashfree" : "razorpay";
 
 const feeLabel = money(PROGRAM.fee);
 
@@ -53,6 +72,7 @@ export default function AdmitFlow() {
   const [payError, setPayError] = useState<string | null>(null);
   const [paying, setPaying] = useState(false);
   const [razorpayReady, setRazorpayReady] = useState(false);
+  const [cashfreeReady, setCashfreeReady] = useState(false);
 
   const ti = tierIndex(answers);
   const tier = TIERS[ti];
@@ -73,7 +93,14 @@ export default function AdmitFlow() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(signup),
       });
-      if (!res.ok) throw new Error("signup failed");
+      if (!res.ok) {
+        const payload = await res.json().catch(() => ({}));
+        throw new Error(
+          typeof payload?.error === "string"
+            ? payload.error
+            : "Could not save your details. Try again."
+        );
+      }
       const data = await res.json();
       setSignupId(data.id);
       setStep("q");
@@ -140,6 +167,74 @@ export default function AdmitFlow() {
 
   async function payNow() {
     setPayError(null);
+    if (PROVIDER === "cashfree") return payWithCashfree();
+    return payWithRazorpay();
+  }
+
+  async function payWithCashfree() {
+    if (!cashfreeReady || typeof window.Cashfree === "undefined") {
+      setPayError("Payment is still loading. Try again in a moment.");
+      return;
+    }
+    setPaying(true);
+    try {
+      const orderRes = await fetch("/api/cashfree/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          signupId,
+          name: signup.name,
+          email: signup.email,
+          phone: signup.phone,
+        }),
+      });
+      if (!orderRes.ok) {
+        const err = await orderRes.json().catch(() => ({}));
+        throw new Error(err.error || "Could not start payment");
+      }
+      const order = await orderRes.json();
+
+      const cashfree = window.Cashfree({ mode: order.mode });
+      const result = await cashfree.checkout({
+        paymentSessionId: order.paymentSessionId,
+        redirectTarget: "_modal",
+      });
+
+      if (result?.error) {
+        setPayError(result.error.message || "Payment was not completed.");
+        setPaying(false);
+        return;
+      }
+
+      // The browser is never trusted. The server asks Cashfree what happened.
+      const verifyRes = await fetch("/api/cashfree/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          orderId: order.orderId,
+          signupId,
+          email: signup.email,
+          name: signup.name,
+        }),
+      });
+      const verifyData = await verifyRes.json().catch(() => ({}));
+
+      if (verifyRes.ok && verifyData.verified) {
+        setStep("done");
+        window.scrollTo({ top: 0, behavior: "auto" });
+      } else {
+        setPayError(
+          "We could not confirm the payment. If money left your account, email hello@deservv.com before retrying."
+        );
+      }
+    } catch (err) {
+      setPayError(err instanceof Error ? err.message : "Could not start payment");
+    } finally {
+      setPaying(false);
+    }
+  }
+
+  async function payWithRazorpay() {
     if (!razorpayReady || typeof window.Razorpay === "undefined") {
       setPayError("Payment is still loading. Try again in a moment.");
       return;
@@ -227,11 +322,19 @@ export default function AdmitFlow() {
       className="min-h-screen flex flex-col items-center relative overflow-hidden"
       style={{ padding: "clamp(96px,12vh,132px) 20px 70px" }}
     >
-      <Script
-        src="https://checkout.razorpay.com/v1/checkout.js"
-        onLoad={() => setRazorpayReady(true)}
-        strategy="afterInteractive"
-      />
+      {PROVIDER === "cashfree" ? (
+        <Script
+          src="https://sdk.cashfree.com/js/v3/cashfree.js"
+          onLoad={() => setCashfreeReady(true)}
+          strategy="afterInteractive"
+        />
+      ) : (
+        <Script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          onLoad={() => setRazorpayReady(true)}
+          strategy="afterInteractive"
+        />
+      )}
       <div
         className="absolute -top-[190px] -right-[150px] w-[540px] h-[540px] rounded-full border border-dashed border-gold/[0.12] pointer-events-none"
       />

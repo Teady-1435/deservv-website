@@ -4,19 +4,19 @@ import { PROGRAM } from "@/lib/config";
 
 export default function Footer() {
   return (
-    <footer className="px-5 md:px-14 pt-13 md:pt-21 pb-8 bg-ink-alt">
+    <footer className="px-[22px] md:px-14 pt-13 md:pt-21 pb-8 bg-ink-alt">
       <div className="max-w-[1280px] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-11 border-b border-white/[0.08]">
           <div>
             <div className="mb-3.5">
               <Logo size={26} />
             </div>
-            <p className="m-0 max-w-[30ch] text-[15px] leading-[1.6] text-muted-300">
+            <p className="m-0 max-w-[30ch] text-[15px] leading-[1.7] xs:leading-[1.6] text-muted-300">
               The best way to learn and apply AI. Built for people with a job to
               do on Monday.
             </p>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-4 xs:gap-3">
             <span className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-muted-600">
               Program
             </span>
@@ -33,7 +33,7 @@ export default function Footer() {
               For companies
             </Link>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-4 xs:gap-3">
             <span className="font-mono text-[10.5px] tracking-[0.16em] uppercase text-muted-600">
               Room
             </span>

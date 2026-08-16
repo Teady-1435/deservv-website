@@ -1,7 +1,8 @@
 import HomeReel from "@/components/HomeReel";
 import Reveal from "@/components/Reveal";
 import Footer from "@/components/Footer";
-import { PROGRAM, money } from "@/lib/config";
+import ImageSlot from "@/components/ImageSlot";
+import { PROGRAM, money, IMAGES } from "@/lib/config";
 
 const feeLabel = money(PROGRAM.fee);
 
@@ -12,7 +13,7 @@ export default function HomePage() {
 
       <section
         className="relative border-b border-white/[0.07] overflow-hidden"
-        style={{ padding: "clamp(56px,9vw,120px) clamp(20px,4vw,56px) clamp(40px,6vw,80px)" }}
+        style={{ padding: "clamp(56px,9vw,120px) clamp(22px,4vw,56px) clamp(40px,6vw,80px)" }}
       >
         <div className="absolute -top-[180px] -right-[120px] w-[520px] h-[520px] rounded-full border border-dashed border-gold/[0.14] pointer-events-none" />
         <div className="max-w-[1280px] mx-auto">
@@ -23,8 +24,8 @@ export default function HomePage() {
             What you already paid for
           </div>
 
-          <p className="max-w-[54ch] text-base leading-[1.6] text-muted-100 mb-6 md:mb-10">
-            You already spent lakhs on the first three. Here is the one that
+          <p className="max-w-[54ch] text-base leading-[1.7] xs:leading-[1.6] text-muted-100 mb-7 md:mb-10">
+            You already spent lakhs on the first three. Here&apos;s the one that
             pays you back.
           </p>
 
@@ -34,7 +35,7 @@ export default function HomePage() {
           >
             <div className="flex flex-col">
               <div className="font-mono text-[10px] tracking-[0.16em] uppercase text-muted-600 mb-3.5">
-                Programs you already paid for — elsewhere
+                Programs you paid for — elsewhere
               </div>
               <div className="flex flex-col gap-3.5">
                 {[
@@ -67,22 +68,22 @@ export default function HomePage() {
 
           <Reveal
             as="h1"
-            className="font-display font-semibold leading-[1.02] max-w-[20ch]"
+            className="font-display font-semibold type-display max-w-[20ch]"
             style={{
-              fontSize: "clamp(34px,5.4vw,76px)",
-              letterSpacing: "-0.035em",
+              fontSize: "clamp(30px,5.4vw,76px)",
               margin: "clamp(36px,6vw,72px) 0 0",
-              textWrap: "balance",
             }}
           >
-            You never needed another certificate. You needed the{" "}
-            <span className="text-gold">systems</span>.
+            You never needed another&nbsp;certificate.{" "}
+            <span className="block xs:inline">
+              You needed the&nbsp;<span className="text-gold">systems</span>.
+            </span>
           </Reveal>
 
           <Reveal
             as="p"
-            className="max-w-[62ch] text-muted-100"
-            style={{ fontSize: "clamp(16px,1.3vw,19px)", lineHeight: 1.65, margin: "26px 0 0", textWrap: "pretty" }}
+            className="max-w-[62ch] text-muted-100 leading-[1.72] xs:leading-[1.65]"
+            style={{ fontSize: "clamp(16px,1.3vw,19px)", margin: "26px 0 0", textWrap: "pretty" }}
           >
             Every year you paid for theory and left with slides. Meanwhile the
             people pulling ahead of you quietly rebuilt their own working day,
@@ -135,28 +136,28 @@ export default function HomePage() {
 
       <section
         className="border-b border-white/[0.07]"
-        style={{ padding: "clamp(60px,8vw,110px) clamp(20px,4vw,56px)", background: "rgba(229,52,42,0.03)" }}
+        style={{ padding: "clamp(60px,8vw,110px) clamp(22px,4vw,56px)", background: "rgba(229,52,42,0.03)" }}
       >
         <div className="max-w-[1280px] mx-auto">
-          <div className="font-mono text-[11px] tracking-[0.2em] uppercase text-red mb-2.5">
-            This is the market. Not us.
-          </div>
-          <div className="font-mono text-[11.5px] tracking-[0.2em] uppercase text-gold mb-5">
-            What the market sells you
+          <div className="font-mono text-[11px] tracking-[0.2em] uppercase text-red leading-[1.75] xs:leading-[1.5] mb-5">
+            What a typical AI course sells — not Deservv
           </div>
           <Reveal
             as="h2"
-            className="font-display font-semibold leading-[1.06] max-w-[26ch]"
-            style={{ fontSize: "clamp(30px,4.2vw,58px)", letterSpacing: "-0.03em", margin: "0 0 22px", textWrap: "balance" }}
+            className="font-display font-semibold type-display max-w-[26ch] mb-7 xs:mb-[22px]"
+            style={{ fontSize: "clamp(27px,4.2vw,58px)" }}
           >
-            Six months. Two lakhs. A glorious certificate.{" "}
-            <span className="text-muted-400">And nothing changes on Monday.</span>
+            A typical AI course: six&nbsp;months, two&nbsp;lakhs,
+            a&nbsp;certificate.{" "}
+            <span className="text-muted-400 block xs:inline">
+              Monday looks the&nbsp;same.
+            </span>
           </Reveal>
-          <Reveal as="p" className="max-w-[60ch] text-[17px] leading-[1.65] text-muted-100">
+          <Reveal as="p" className="max-w-[60ch] text-[17px] leading-[1.72] xs:leading-[1.65] text-muted-100">
             <span style={{ marginBottom: "clamp(40px,5vw,64px)" }} className="block">
-              Neural-network diagrams you will never draw again. A tour of forty
-              tools at five minutes each. One new habit: you occasionally chat
-              with a chatbot. Your appraisal knows the difference.
+              Neural-network diagrams you&apos;ll never draw again. A tour of
+              forty tools at five minutes each. One new habit: you occasionally
+              open a chatbot. Your appraisal knows the difference.
             </span>
           </Reveal>
 
@@ -166,29 +167,31 @@ export default function HomePage() {
               style={{ gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}
             >
               {[
-                ["6 mo", "of evenings, in exchange for a syllabus written before the agent era started."],
-                ["₹1–3L", "paid upfront, often on EMI, for content you could have watched for free."],
+                ["6 mo", "of evenings, against a syllabus written before the agent era started."],
+                ["₹1–3L", "paid upfront, often on EMI, for content you could watch for free."],
                 ["1 PDF", "to hang on LinkedIn. No promotion attached. No hike attached. No system running."],
               ].map(([big, text]) => (
                 <div key={big} className="bg-ink-alt p-8 md:p-9 flex flex-col gap-3">
                   <span className="font-display text-[42px] font-semibold text-red" style={{ letterSpacing: "-0.03em" }}>
                     {big}
                   </span>
-                  <span className="text-[15.5px] leading-[1.6] text-muted-100">{text}</span>
+                  <span className="text-[15.5px] leading-[1.7] xs:leading-[1.6] text-muted-100">{text}</span>
                 </div>
               ))}
             </div>
           </Reveal>
 
-          <Reveal as="p" className="max-w-[62ch] mx-auto text-center text-muted-100 text-[16.5px] leading-[1.65] mt-10">
-            Everything above is what they sold you. Everything below is what we
-            built instead.
+          <Reveal as="p" className="max-w-[62ch] mx-auto text-center text-muted-100 text-[16.5px] leading-[1.72] xs:leading-[1.65] mt-10">
+            None of that is Deservv. Here&apos;s the difference, side by side.
           </Reveal>
 
-          <Reveal as="h3" className="font-display font-semibold leading-[1.08] text-center mt-10">
-            <span style={{ fontSize: "clamp(26px,3.2vw,44px)", letterSpacing: "-0.03em" }}>
-              Same ambition. <span className="text-gold">Different delivery.</span>
-            </span>
+          <Reveal
+            as="h3"
+            className="font-display font-semibold type-display text-center mt-10"
+            style={{ fontSize: "clamp(24px,3.2vw,44px)" }}
+          >
+            Same ambition.{" "}
+            <span className="text-gold">Different&nbsp;delivery.</span>
           </Reveal>
 
           <Reveal className="border border-white/10 overflow-hidden mt-8" as="div" data-cmp="1">
@@ -231,7 +234,7 @@ export default function HomePage() {
 
       <section
         className="border-b border-white/[0.07] bg-ink-alt overflow-hidden"
-        style={{ padding: "clamp(60px,8vw,110px) clamp(20px,4vw,56px)" }}
+        style={{ padding: "clamp(60px,8vw,110px) clamp(22px,4vw,56px)" }}
       >
         <div className="max-w-[1280px] mx-auto">
           <div className="font-mono text-[11.5px] tracking-[0.2em] uppercase text-gold mb-5">
@@ -242,12 +245,17 @@ export default function HomePage() {
             style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "clamp(32px,5vw,64px)" }}
           >
             <div>
-              <Reveal as="h2" className="font-display font-semibold leading-[1.06] mb-5">
-                <span style={{ fontSize: "clamp(30px,4.2vw,56px)", letterSpacing: "-0.03em" }}>
-                  The cohort ends. <span className="text-gold">The room doesn&apos;t.</span>
+              <Reveal
+                as="h2"
+                className="font-display font-semibold type-display mb-5"
+                style={{ fontSize: "clamp(27px,4.2vw,56px)" }}
+              >
+                The cohort ends.{" "}
+                <span className="text-gold block xs:inline">
+                  The room doesn&apos;t.
                 </span>
               </Reveal>
-              <Reveal as="p" className="max-w-[52ch] text-[17px] leading-[1.65] text-muted-100 mb-7">
+              <Reveal as="p" className="max-w-[52ch] text-[17px] leading-[1.72] xs:leading-[1.65] text-muted-100 mb-7">
                 A course is a calendar. A room is a compounding asset. Your batch
                 is deliberately mixed — a finance controller, a growth lead, a
                 support head, two founders — because the automation that saves
@@ -260,25 +268,25 @@ export default function HomePage() {
                   ["02", "The build channel", "Post a broken workflow, get it unblocked. Alumni answer, because six months ago they asked the same thing."],
                   ["03", "The tool layer moves. You move with it.", "When a tool in the curriculum changes, the room gets the rebuild. The skill was never the tool."],
                 ].map(([num, title, body]) => (
-                  <div key={num} className="flex gap-4 py-4.5 border-b border-white/[0.08]">
+                  <div key={num} className="flex gap-4 py-5 xs:py-4.5 border-b border-white/[0.08]">
                     <span className="font-mono text-[11px] text-gold pt-1">{num}</span>
                     <div>
-                      <div className="font-display text-[18px] font-medium mb-1.5">{title}</div>
-                      <div className="text-[15px] leading-[1.6] text-muted-200">{body}</div>
+                      <div className="font-display text-[18px] leading-[1.35] font-medium mb-2 xs:mb-1.5">{title}</div>
+                      <div className="text-[15px] leading-[1.7] xs:leading-[1.6] text-muted-200">{body}</div>
                     </div>
                   </div>
                 ))}
               </Reveal>
             </div>
             <Reveal className="relative">
-              <div className="relative w-full aspect-[4/3] border border-white/10 bg-white/[0.03] flex items-center justify-center">
-                <span className="font-mono text-[11px] text-muted-500 text-center px-6">
-                  Bengaluru meetup photo — a real room, real screens
-                </span>
-                <div className="absolute left-0 bottom-0 px-4 py-3.5 font-mono text-[10.5px] tracking-[0.14em] uppercase text-white/75 pointer-events-none">
-                  Bengaluru · monthly · members only
-                </div>
-              </div>
+              <ImageSlot
+                src={IMAGES.communityMeetup}
+                alt="Deservv members at the monthly Bengaluru meetup"
+                placeholder="Bengaluru meetup photo — a real room, real screens"
+                aspect="aspect-[4/3]"
+                sizes="(max-width: 768px) 100vw, 46vw"
+                caption="Bengaluru · monthly · members only"
+              />
             </Reveal>
           </div>
         </div>

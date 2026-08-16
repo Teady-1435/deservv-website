@@ -28,6 +28,26 @@
   --ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+@theme {
+  /* Phone-only breakpoint. Used as `xs:` to restore desktop values above it,
+     so the base (unprefixed) value is the mobile one. */
+  --breakpoint-xs: 30rem;
+}
+
+@layer components {
+  /* Display headings.
+     Leading and tracking are derived from the rendered font-size rather than
+     fixed ratios. The same declaration yields 1.02 / -0.035em at the 76px
+     desktop size and ~1.17 / -0.02em at the 30px mobile size. Fixed desktop
+     ratios applied to a four-line mobile headline close the line gaps into a
+     solid block, which is the main reason mobile reads as heavy. */
+  .type-display {
+    line-height: calc(0.93em + 7px);
+    letter-spacing: calc(-0.045em + 0.75px);
+    text-wrap: balance;
+  }
+}
+
 @layer base {
   html,
   body {
@@ -153,17 +173,24 @@
   [data-cmp] > div {
     grid-template-columns: 1fr 1fr !important;
   }
-  [data-cmp] > div > div:first-child {
-    grid-column: 1 / -1;
-    border-right: 0 !important;
-    padding: 16px 18px 0 !important;
-  }
   [data-cmp] > div:first-child > div:first-child {
     display: none !important;
   }
-  [data-cmp] > div > div {
-    padding: 16px 14px !important;
-    font-size: 14px !important;
+  /* Row label spans the full width above its two cells. It must be excluded
+     from the cell rule below — a blanket font-size was pushing these 10.5px
+     tracked-mono labels to 14px, where they wrapped onto two lines. */
+  [data-cmp] > div > div:first-child {
+    grid-column: 1 / -1;
+    border-right: 0 !important;
+    padding: 20px 18px 2px !important;
+  }
+  /* Comparison cells. Left-aligned: at ~150px wide, centring leaves both
+     edges ragged and costs a line on most cells. */
+  [data-cmp] > div > div:not(:first-child) {
+    padding: 12px 16px 20px !important;
+    font-size: 14.5px !important;
+    line-height: 1.55 !important;
+    text-align: left !important;
   }
   [data-wf] {
     grid-template-columns: 1fr !important;
@@ -181,6 +208,16 @@
   }
 }
 
+@media (max-width: 479px) {
+  /* `balance` equalises line lengths, which on a ~316px measure overrides
+     phrase boundaries — it was breaking "...course: six / months, two lakhs,
+     a / certificate". `pretty` keeps the rag natural; the &nbsp; joints in the
+     copy hold the phrases that must not split. */
+  .type-display {
+    text-wrap: pretty;
+  }
+}
+
 @media (max-width: 560px) {
   [data-paidrow] {
     flex-direction: column;
@@ -194,13 +231,17 @@
 }
 
 @media (max-width: 430px) {
-  [data-nav-links] > button {
+  /* These are <Link>s, so they render as <a>. The selector used to say
+     `> button` and matched nothing, which is why the bar stayed at its full
+     width and squeezed the CTA into a three-line pill. */
+  [data-nav-links] > a:not([data-cta]) {
     font-size: 10.5px !important;
     padding: 10px 2px !important;
   }
   [data-cta] {
     margin-left: 4px !important;
-    padding: 9px 13px !important;
+    padding: 9px 12px !important;
     font-size: 10px !important;
+    white-space: nowrap;
   }
 }

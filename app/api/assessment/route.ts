@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/server";
 import { QUESTIONS, TIERS, tierIndex, type Answers } from "@/lib/config";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   const body = await request.json();
   const { signupId, answers } = body as {
@@ -36,6 +39,7 @@ export async function POST(request: Request) {
         q5_blocker: labelOf(4),
         q6_urgency: labelOf(5),
         tier,
+        answers,
       })
       .select("id")
       .single();

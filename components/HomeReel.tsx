@@ -705,8 +705,8 @@ export default function HomeReel() {
           <div
             ref={heroSubRef}
             data-hero-sub="1"
-            className="max-w-[44ch] mx-auto text-center text-muted-100"
-            style={{ opacity: 0, margin: "clamp(18px,3vh,38px) auto 0", fontSize: "clamp(15px,1.4vw,19px)", lineHeight: 1.6 }}
+            className="max-w-[44ch] mx-auto text-center text-muted-100 leading-[1.7] xs:leading-[1.6]"
+            style={{ opacity: 0, margin: "clamp(18px,3vh,38px) auto 0", fontSize: "clamp(15px,1.4vw,19px)" }}
           >
             Every one of those years, someone sold you a certificate. This one, you build the systems instead.
           </div>

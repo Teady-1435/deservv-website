@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import Footer from "@/components/Footer";
 import CurriculumAccordion from "@/components/CurriculumAccordion";
@@ -20,10 +21,16 @@ export default function ApplyPage() {
           style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "clamp(32px,5vw,72px)" }}
         >
           <div className="relative">
-            <div className="relative w-full aspect-[4/5] border border-white/[0.12] bg-white/[0.03] flex items-center justify-center">
-              <span className="font-mono text-[11px] text-muted-500 text-center px-6">
-                Vikas Patel — portrait
-              </span>
+            <div className="relative w-full aspect-[4/5] border border-white/[0.12] bg-white/[0.03] overflow-hidden">
+              <Image
+                src="/img/vikas-patel-hero.jpg"
+                alt="Vikas Patel, instructor at Deservv"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 42vw"
+                className="object-cover object-top"
+              />
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
             </div>
             <div className="absolute -right-3 -bottom-3 bg-ink border border-gold/35 px-4 py-3 font-mono text-[10.5px] tracking-[0.14em] uppercase text-gold">
               Teaches every session himself
